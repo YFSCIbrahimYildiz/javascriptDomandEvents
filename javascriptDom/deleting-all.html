@@ -63,13 +63,20 @@
         ];
         let editID;
         let isEditTask=false;
-        let taskInput=document.querySelector("#txtTaskName");
+        const taskInput=document.querySelector("#txtTaskName");
         displayTasks();
+        const btnClear=document.querySelector("#btnClear");
         function displayTasks()
         {
+
             let ul=document.getElementById("task-list");
             ul.innerHTML="";
-        for(let gorev of gorevlistesi){
+
+            if(gorevlistesi.length==0){
+                ul.innerHTML="<p class='p-3 m-3'> Gorev listeniz boş.</p>"
+            }
+            else{
+                for(let gorev of gorevlistesi){
             let li=`
             <li class="task list-group-item">
                 <div class="form-check">
@@ -90,6 +97,8 @@
         `;
         ul.insertAdjacentHTML("beforeend",li);
         }
+            }
+        
         }
         document.querySelector("#btnAddNewTask").addEventListener("click",newTask);
         document.querySelector("#btnAddNewTask").addEventListener("keypress",function(){
@@ -151,7 +160,11 @@
             taskInput.classList.add("active");
         }
 
-        
+        btnClear.addEventListener("click",function(){
+            gorevlistesi.splice(0,gorevlistesi.length);
+
+            displayTasks();
+        })
     </script>
 
 
